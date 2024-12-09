@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import MenuSelector from "./components/MenuSelector";
 import Cart from "./components/Cart";
 import Order from "./components/Order";
+import Header from "./components/Header";
 import "./index";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isNightMode, setIsNightMode] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [userType, setUserType] = useState("regular");
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
@@ -27,16 +27,8 @@ function App() {
     });
   };
 
-  const toggleNightMode = () => {
-    setIsNightMode(!isNightMode);
-  };
-
-  const handleConfirmOrder = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const toggleModal = () => {
+    setShowModal((prevShowModal) => !prevShowModal);
   };
 
   const totalPrice = cartItems.reduce(
@@ -51,13 +43,7 @@ function App() {
       }`}
     >
       <div className="container mt-5">
-        <div className="d-flex justify-content-between mb-3">
-          <h1>Order Food Application</h1>
-          <button className="btn btn-primary">Student/Teacher</button>
-          <button className="btn btn-secondary" onClick={toggleNightMode}>
-            {isNightMode ? "Switch to Day Mode" : "Switch to Night Mode"}
-          </button>
-        </div>
+        <Header />
         <div className="row">
           <div className="col-md-9">
             <MenuSelector addToCart={addToCart} />
@@ -66,13 +52,13 @@ function App() {
             <Cart
               cartItems={cartItems}
               setCartItems={setCartItems}
-              onConfirmOrder={handleConfirmOrder}
+              onConfirmOrder={toggleModal}
             />
           </div>
         </div>
         <Order
           show={showModal}
-          handleClose={handleCloseModal}
+          handleClose={toggleModal}
           cartItems={cartItems}
           totalPrice={totalPrice}
         />
