@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function Cart({ cartItems, setCartItems }) {
+export default function Cart({ cartItems, setCartItems, onConfirmOrder }) {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -70,7 +70,9 @@ export default function Cart({ cartItems, setCartItems }) {
           ))}
         </ul>
       )}
-      <button className="btn btn-success w-100">Confirm Order</button>
+      <button className="btn btn-success w-100" onClick={onConfirmOrder}>
+        Confirm Order
+      </button>
     </div>
   );
 }

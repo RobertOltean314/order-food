@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import MenuSelector from "./components/MenuSelector";
 import Cart from "./components/Cart";
+import Order from "./components/Order";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isNightMode, setIsNightMode] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
@@ -27,6 +29,23 @@ function App() {
     setIsNightMode(!isNightMode);
   };
 
+  const handleConfirmOrder = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleFinishOrder = () => {
+    window.location.reload();
+  };
+
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
   return (
     <div
       className={`container mt-5 ${
@@ -44,9 +63,20 @@ function App() {
           <MenuSelector addToCart={addToCart} />
         </div>
         <div className="col-md-3">
-          <Cart cartItems={cartItems} setCartItems={setCartItems} />
+          <Cart
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            onConfirmOrder={handleConfirmOrder}
+          />
         </div>
       </div>
+      <Order
+        show={showModal}
+        handleClose={handleCloseModal}
+        cartItems={cartItems}
+        totalPrice={totalPrice}
+        handleFinish={handleFinishOrder}
+      />
     </div>
   );
 }
