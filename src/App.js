@@ -3,12 +3,16 @@ import MenuSelector from "./components/MenuSelector";
 import Cart from "./components/Cart";
 import Order from "./components/Order";
 import Header from "./components/Header";
-import "./index";
+import "./index.css";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isNightMode, setIsNightMode] = useState(true);
   const [showModal, setShowModal] = useState(false);
+
+  const containerClass = isNightMode
+    ? "bg-dark text-white"
+    : "bg-light text-dark";
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
@@ -31,19 +35,20 @@ function App() {
     setShowModal((prevShowModal) => !prevShowModal);
   };
 
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const calculateTotalPrice = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
 
   return (
-    <div
-      className={`container-full ${
-        isNightMode ? "bg-dark text-white" : "bg-light text-dark"
-      }`}
-    >
+    <div className={`container-full ${containerClass}`}>
       <div className="container mt-5">
-        <Header />
+        <Header
+          isNightMode={isNightMode}
+          toggleNightMode={() => setIsNightMode(!isNightMode)}
+        />
         <div className="row">
           <div className="col-md-9">
             <MenuSelector addToCart={addToCart} />
@@ -60,7 +65,7 @@ function App() {
           show={showModal}
           handleClose={toggleModal}
           cartItems={cartItems}
-          totalPrice={totalPrice}
+          totalPrice={calculateTotalPrice()}
         />
       </div>
     </div>

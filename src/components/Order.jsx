@@ -8,7 +8,7 @@ import {
 
 export default function OrderModal({
   show,
-  handleClose,
+  toggleModal,
   cartItems,
   totalPrice,
 }) {
@@ -23,7 +23,7 @@ export default function OrderModal({
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={toggleModal}>
       <Modal.Header closeButton>
         <Modal.Title>
           {showPaymentOptions ? "Choose Payment Method" : "Confirm Order"}
@@ -66,7 +66,7 @@ export default function OrderModal({
       <Modal.Footer>
         {showPaymentOptions ? null : (
           <>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={toggleModal}>
               Edit Order
             </Button>
             <Button variant="primary" onClick={handleConfirmOrder}>
