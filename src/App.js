@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import MenuSelector from "./components/MenuSelector";
 import Cart from "./components/Cart";
 import Order from "./components/Order";
+import "./index";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
-  const [isNightMode, setIsNightMode] = useState(false);
+  const [isNightMode, setIsNightMode] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
   const addToCart = (item) => {
@@ -48,35 +49,37 @@ function App() {
 
   return (
     <div
-      className={`container mt-5 ${
+      className={`container-full ${
         isNightMode ? "bg-dark text-white" : "bg-light text-dark"
       }`}
     >
-      <div className="d-flex justify-content-between mb-3">
-        <h1>Menu App</h1>
-        <button className="btn btn-secondary" onClick={toggleNightMode}>
-          {isNightMode ? "Switch to Day Mode" : "Switch to Night Mode"}
-        </button>
-      </div>
-      <div className="row">
-        <div className="col-md-9">
-          <MenuSelector addToCart={addToCart} />
+      <div className="container mt-5">
+        <div className="d-flex justify-content-between mb-3">
+          <h1>Menu App</h1>
+          <button className="btn btn-secondary" onClick={toggleNightMode}>
+            {isNightMode ? "Switch to Day Mode" : "Switch to Night Mode"}
+          </button>
         </div>
-        <div className="col-md-3">
-          <Cart
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-            onConfirmOrder={handleConfirmOrder}
-          />
+        <div className="row">
+          <div className="col-md-9">
+            <MenuSelector addToCart={addToCart} />
+          </div>
+          <div className="col-md-3">
+            <Cart
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              onConfirmOrder={handleConfirmOrder}
+            />
+          </div>
         </div>
+        <Order
+          show={showModal}
+          handleClose={handleCloseModal}
+          cartItems={cartItems}
+          totalPrice={totalPrice}
+          handleFinish={handleFinishOrder}
+        />
       </div>
-      <Order
-        show={showModal}
-        handleClose={handleCloseModal}
-        cartItems={cartItems}
-        totalPrice={totalPrice}
-        handleFinish={handleFinishOrder}
-      />
     </div>
   );
 }
