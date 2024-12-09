@@ -11,7 +11,6 @@ export default function OrderModal({
   handleClose,
   cartItems,
   totalPrice,
-  handleFinish,
 }) {
   const [showPaymentOptions, setShowPaymentOptions] = useState(false);
 
@@ -19,9 +18,8 @@ export default function OrderModal({
     setShowPaymentOptions(true);
   };
 
-  const handlePayment = (method) => {
-    // Handle payment logic here
-    handleFinish();
+  const handlePayment = () => {
+    window.location.reload();
   };
 
   return (

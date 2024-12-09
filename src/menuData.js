@@ -8,7 +8,7 @@ const menuData = {
     },
     {
       title: "Couple's Combo",
-      image: "images/family_feast.jpg",
+      image: "src/images/family_feast.jpg",
       description: "A meal for two with a variety of items.",
       price: 19.99,
     },

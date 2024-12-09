@@ -77,7 +77,6 @@ function App() {
           handleClose={handleCloseModal}
           cartItems={cartItems}
           totalPrice={totalPrice}
-          handleFinish={handleFinishOrder}
         />
       </div>
     </div>
