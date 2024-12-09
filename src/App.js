@@ -8,6 +8,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isNightMode, setIsNightMode] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [userType, setUserType] = useState("regular");
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
@@ -38,10 +39,6 @@ function App() {
     setShowModal(false);
   };
 
-  const handleFinishOrder = () => {
-    window.location.reload();
-  };
-
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -55,7 +52,8 @@ function App() {
     >
       <div className="container mt-5">
         <div className="d-flex justify-content-between mb-3">
-          <h1>Menu App</h1>
+          <h1>Order Food Application</h1>
+          <button className="btn btn-primary">Student/Teacher</button>
           <button className="btn btn-secondary" onClick={toggleNightMode}>
             {isNightMode ? "Switch to Day Mode" : "Switch to Night Mode"}
           </button>
