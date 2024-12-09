@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import menuData from "../menuData";
 import Item from "./Item";
+import Navbar from "./Navbar";
 
 export default function MenuSelector({ addToCart }) {
   const [selectedSection, setSelectedSection] = useState(null);
@@ -11,47 +12,7 @@ export default function MenuSelector({ addToCart }) {
 
   return (
     <div className="border rounded p-3">
-      <nav
-        className="navbar navbar-expand-lg bg-body-tertiary"
-        data-bs-theme="dark"
-      >
-        <div className="container-fluid">
-          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav d-flex justify-content-between w-100 mx-3">
-              <button
-                className="nav-link mx-2"
-                onClick={() => handleButtonClick("Menus")}
-              >
-                Menus
-              </button>
-              <button
-                className="nav-link mx-2"
-                onClick={() => handleButtonClick("Sandwiches")}
-              >
-                Sandwiches
-              </button>
-              <button
-                className="nav-link mx-2"
-                onClick={() => handleButtonClick("Drinks")}
-              >
-                Drinks
-              </button>
-              <button
-                className="nav-link mx-2"
-                onClick={() => handleButtonClick("Sweets")}
-              >
-                Sweets
-              </button>
-              <button
-                className="nav-link mx-2"
-                onClick={() => handleButtonClick("Sausages")}
-              >
-                Sausages
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar handleButtonClick={handleButtonClick} />
       {selectedSection && (
         <div className="mt-3">
           <h2>{selectedSection}</h2>

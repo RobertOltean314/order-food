@@ -2,7 +2,7 @@ const menuData = {
   Menus: [
     {
       title: "Family Feast",
-      image: "images/family_feast.jpg",
+      image: "src/images/family_feast.jpg",
       description: "A large meal perfect for the whole family.",
       price: 29.99,
     },
